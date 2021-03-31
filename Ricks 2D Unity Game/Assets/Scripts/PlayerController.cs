@@ -27,9 +27,9 @@ public class PlayerController : MonoBehaviour
             Debug.Log(hit.point);
         }
 
-        if (jumpable)
+        if (jumpable && Input.GetKey(KeyCode.Space))
         {
-            rigidbody.velocity = Vector2.up * jumpSpeed * 20;
+            rigidbody.velocity = Vector2.up * jumpSpeed * 3;
             jumpable = false;
         }
 
