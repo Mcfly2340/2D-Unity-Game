@@ -9,12 +9,16 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheckPoint;
     public float groundCheckRadius;
     public LayerMask groundLayer;
+    private Rigidbody2D rb;
+    public GameObject player;
+    public float otherSpeed;
     
     // Use this for initialization
     void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        //GameObject player = GameObject.FindGameObjectWithTag("Player");
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        //Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
 
@@ -23,7 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         //move left & right
         horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * 5);
-        
+        //transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * 5);
+        rb.velocity = Vector3.right * horizontalInput * Time.deltaTime * otherSpeed;
     }
 }
