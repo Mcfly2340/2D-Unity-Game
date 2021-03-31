@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 public class PlayerController : MonoBehaviour
 {
-    private float horizontalInput;
+    /*private float horizontalInput;
     public float speed = 5f;
     public float jumpSpeed = 8f;
     public AudioSource jump;
@@ -29,5 +29,62 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         //transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * 5);
         rb.velocity = Vector3.right * horizontalInput * Time.deltaTime * otherSpeed;
+    }
+    */
+
+    private float horizontalInput;
+    public float speed = 5f;
+    public float jumpSpeed = 8f;
+    public float groundCheckRadius;
+    public LayerMask groundLayer;
+    public Rigidbody2D rb;
+    public bool jumpable = false;
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckRadius, groundLayer);
+        if (hit.collider != null)
+        {
+            jumpable = true;
+            Debug.Log(hit.point);
+        }
+
+        if (jumpable && Input.GetKey(KeyCode.Space))
+        {
+            rb.velocity = Vector2.up * jumpSpeed * 3;
+            jumpable = false;
+        }
+        horizontalInput = Input.GetAxis("Horizontal");
+        //transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * 5);
+
+        //input left & right
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb.velocity = Vector2.right * speed * horizontalInput;
+
+        }
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            rb.velocity = Vector2.right * -1;
+        }
+        //
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb.velocity = Vector2.right * speed * horizontalInput;
+
+        }
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            rb.velocity = Vector2.right * -1;
+        }
     }
 }

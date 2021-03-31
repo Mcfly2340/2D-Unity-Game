@@ -24,6 +24,8 @@ public class PressurePlate : MonoBehaviour
             Debug.Log("This Collider2D cannot be triggered");
         }
         */
+        coll = GetComponent<Collider2D>();
+        doorObject.GetComponent<BoxCollider2D>().enabled = true;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -38,7 +40,9 @@ public class PressurePlate : MonoBehaviour
             doorFunction.openSound.Play();
             Debug.Log("door opened");
             coll.isTrigger = true;
-            OnTriggerStay2D(other);          
+            OnTriggerStay2D(other);
+            doorObject.GetComponent<BoxCollider2D>().enabled = false;
+
         }
 
     }
@@ -52,6 +56,8 @@ public class PressurePlate : MonoBehaviour
             doorFunction.closeSound.Play();
             Debug.Log("door closed");
             OnTriggerStay2D(other);
+            doorObject.GetComponent<BoxCollider2D>().enabled = true;
+
         }
         transform.Translate(Vector3.up * 0.1f);
         transform.position = new Vector3(3.5f, -4.1f, 0);
