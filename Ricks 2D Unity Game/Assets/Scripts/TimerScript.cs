@@ -27,7 +27,6 @@ public class TimerScript : MonoBehaviour
         {
             millisecondsTimer = 0;
             millisecondsTimer += Time.deltaTime;
-            Debug.Log("1 second up!");
         }
         if (seconds == 60)
         {

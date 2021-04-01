@@ -1,90 +1,59 @@
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public class PlayerController : MonoBehaviour
 {
-    /*private float horizontalInput;
-    public float speed = 5f;
-    public float jumpSpeed = 8f;
-    public AudioSource jump;
-    public Transform groundCheckPoint;
-    public float groundCheckRadius;
-    public LayerMask groundLayer;
-    private Rigidbody2D rb;
-    public GameObject player;
-    public float otherSpeed;
-    
-    // Use this for initialization
-    void Start()
-    {
-        //GameObject player = GameObject.FindGameObjectWithTag("Player");
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        //Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-    }
-
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        //move left & right
-        horizontalInput = Input.GetAxis("Horizontal");
-        //transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * 5);
-        rb.velocity = Vector3.right * horizontalInput * Time.deltaTime * otherSpeed;
-    }
-    */
-
-    private float horizontalInput;
-    public float speed = 5f;
-    public float jumpSpeed = 8f;
-    public float groundCheckRadius;
-    public LayerMask groundLayer;
+    public Animator anim;
     public Rigidbody2D rb;
-    public bool jumpable = false;
+    public float jumpForce;
+    public float playerSpeed;
+    public Vector2 jumpHeight;
+    private bool isOnGround;
+    public float positionRadius;
+    public LayerMask ground;
+    public Transform playerPos;
 
-    // Use this for initialization
+
+    // Start is called before the first frame update
     void Start()
     {
-
+        Collider2D[] colliders = transform.GetComponentsInChildren<Collider2D>();
+        for (int i = 0; 1 < colliders.Length; i++)
+        {
+            for (int k = i + 1; k < colliders.Length; k++)
+            {
+                Physics2D.IgnoreCollision(colliders[i], colliders[k]);
+            }
+        }
     }
 
-
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckRadius, groundLayer);
-        if (hit.collider != null)
+        if(Input.GetAxisRaw("Horizontal") != 0)
         {
-            jumpable = true;
-            Debug.Log(hit.point);
+            if (Input.GetAxisRaw("Horizontal") > 0)
+            {
+                anim.Play("Walk");
+                rb.AddForce(Vector2.right * playerSpeed * Time.deltaTime);
+
+            }
+            else
+            {
+                anim.Play("WalkBack");
+                rb.AddForce(Vector2.left * playerSpeed * Time.deltaTime);
+            }
         }
-
-        if (jumpable && Input.GetKey(KeyCode.Space))
+        else
         {
-            rb.velocity = Vector2.up * jumpSpeed * 3;
-            jumpable = false;
-        }
-        horizontalInput = Input.GetAxis("Horizontal");
-        //transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * 5);
-
-        //input left & right
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.velocity = Vector2.right * speed * horizontalInput;
+            anim.Play("Idle");
 
         }
-        if (Input.GetKeyUp(KeyCode.A))
+        isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
+        if(isOnGround && Input.GetKey(KeyCode.Space))
         {
-            rb.velocity = Vector2.right * -1;
-        }
-        //
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.velocity = Vector2.right * speed * horizontalInput;
-
-        }
-        if (Input.GetKeyUp(KeyCode.D))
-        {
-            rb.velocity = Vector2.right * -1;
+            rb.AddForce(Vector2.up * jumpForce);
         }
     }
 }
