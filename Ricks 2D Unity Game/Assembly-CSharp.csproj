@@ -56,23 +56,24 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Arms.cs" />
     <Compile Include="Assets\Scripts\DoorMechanism.cs" />
     <Compile Include="Assets\Balance.cs" />
     <Compile Include="Assets\Scripts\SeperateJump.cs" />
+    <Compile Include="Assets\Scripts\Grab.cs" />
     <Compile Include="Assets\Scripts\LegCollision.cs" />
     <Compile Include="Assets\Scripts\MoveByTouch.cs" />
     <Compile Include="Assets\Scripts\PlayButton.cs" />
     <Compile Include="Assets\Scripts\TimerScript.cs" />
     <Compile Include="Assets\Scripts\MinionFollow.cs" />
-    <Compile Include="Assets\Scripts\1PlayerController.cs" />
+    <Compile Include="Assets\Scripts\PlayerControllerOLD.cs" />
     <Compile Include="Assets\Scripts\HandPointToMouseRight.cs" />
     <Compile Include="Assets\Scripts\OpenDoor.cs" />
     <Compile Include="Assets\Scripts\PressurePlate.cs" />
     <Compile Include="Assets\Scripts\HandPointToMouseLeft.cs" />
     <Compile Include="Assets\Scripts\CamFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Grab.cs" />
-    <Compile Include="Assets\Scripts\Arms.cs" />
+    <Compile Include="Assets\Scripts\RemoveCursor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

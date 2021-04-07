@@ -8,38 +8,29 @@ public class PressurePlate : MonoBehaviour
     bool doorIsOpen = false;
     public GameObject doorObject;
     public OpenDoor doorFunction;
-    public Collider2D coll;
+    //public Collider2D coll;
+    public Animator anim;
 
     // Update is called once per frame
     void Start()
     {
-        //Check if the isTrigger option on the Collider2D is set to true or false
-        /*
-        if (coll.isTrigger)
-        {
-            Debug.Log("This Collider2D can be triggered");
-        }
-        else if (!coll.isTrigger)
-        {
-            Debug.Log("This Collider2D cannot be triggered");
-        }
-        */
-        coll = GetComponent<Collider2D>();
+        //coll = GetComponent<Collider2D>();
         doorObject.GetComponent<BoxCollider2D>().enabled = true;
+        anim.enabled = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Pressure Plate down");
-
-        transform.position = new Vector3(-19.86f, -4.3f, 0);
+        anim.enabled = true;
+        //transform.Translate(0, -0.1f, 0, Space.Self);
+        anim.Play("PressurePlateDown");
         doorIsOpen = true;
         if (doorIsOpen == true)
         {
             doorFunction.gameObject.GetComponent<SpriteRenderer>().sprite = doorFunction.openDoor;
             doorFunction.openSound.Play();
             Debug.Log("door opened");
-            coll.isTrigger = true;
             doorObject.GetComponent<BoxCollider2D>().enabled = false;
 
         }
@@ -49,6 +40,7 @@ public class PressurePlate : MonoBehaviour
     {
         //click.Stop();
         doorIsOpen = false;
+        anim.enabled = false;
         if (doorIsOpen == false)
         {
             doorFunction.gameObject.GetComponent<SpriteRenderer>().sprite = doorFunction.closeDoor;
@@ -57,8 +49,8 @@ public class PressurePlate : MonoBehaviour
             doorObject.GetComponent<BoxCollider2D>().enabled = true;
 
         }
-        transform.Translate(Vector3.up * 0.1f);
-        transform.position = new Vector3(-19.86f, -4.1f, 0);
+        //transform.Translate(Vector3.up * 0.1f);
+        //transform.Translate(0, 0.1f, 0, Space.Self);
         Debug.Log("Pressure Plate up");
     }
 }
