@@ -8,23 +8,32 @@ public class PressurePlate : MonoBehaviour
     bool doorIsOpen = false;
     public GameObject doorObject;
     public OpenDoor doorFunction;
-    //public Collider2D coll;
+    public Collider2D coll;
     public Animator anim;
+    public bool PlateDown;
+    private GameObject player;
 
     // Update is called once per frame
     void Start()
     {
         //coll = GetComponent<Collider2D>();
         doorObject.GetComponent<BoxCollider2D>().enabled = true;
-        anim.enabled = false;
+        //anim.enabled = false;
+        anim = GetComponent<Animator>();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D collider2D)
     {
         Debug.Log("Pressure Plate down");
-        anim.enabled = true;
+        //anim.enabled = true;
         //transform.Translate(0, -0.1f, 0, Space.Self);
         anim.Play("PressurePlateDown");
+        
+        if (coll.gameObject.CompareTag("Player")){
+            //anim.Play("PressurePlateDown");
+            anim.SetBool("PressurePlateDown", true);
+        }
+
         doorIsOpen = true;
         if (doorIsOpen == true)
         {
@@ -32,15 +41,15 @@ public class PressurePlate : MonoBehaviour
             doorFunction.openSound.Play();
             Debug.Log("door opened");
             doorObject.GetComponent<BoxCollider2D>().enabled = false;
-
         }
-
     }
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D collider2D)
     {
         //click.Stop();
+        //anim.enabled = false;
+        anim.Play("PressurePlateUp");
+
         doorIsOpen = false;
-        anim.enabled = false;
         if (doorIsOpen == false)
         {
             doorFunction.gameObject.GetComponent<SpriteRenderer>().sprite = doorFunction.closeDoor;

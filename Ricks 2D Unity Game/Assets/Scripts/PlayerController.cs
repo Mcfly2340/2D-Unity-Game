@@ -55,5 +55,17 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce);
         }
+        /*if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Vector3 playerpos = new Vector3(0, 0, 180);
+            Vector3 difference = playerpos - transform.position;
+            float rotationZ = Mathf.Atan2(difference.x, -difference.y) * Mathf.Rad2Deg;
+            
+            rb.MoveRotation(Mathf.LerpAngle(rb.rotation, rotationZ, Time.fixedDeltaTime));
+
+
+
+            anim.Play("Crawling");
+        }*/
     }
 }
