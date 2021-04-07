@@ -10,8 +10,6 @@ public class PressurePlate : MonoBehaviour
     public OpenDoor doorFunction;
     public Collider2D coll;
     public Animator anim;
-    public bool PlateDown;
-    private GameObject player;
 
     // Update is called once per frame
     void Start()
