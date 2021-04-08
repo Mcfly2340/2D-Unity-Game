@@ -10,8 +10,6 @@ public class PressurePlate : MonoBehaviour
     public OpenDoor doorFunction;
     public Collider2D coll;
     public Animator anim;
-    public bool PlateDown;
-    private GameObject player;
 
     // Update is called once per frame
     void Start()
@@ -25,13 +23,10 @@ public class PressurePlate : MonoBehaviour
     void OnTriggerStay2D(Collider2D collider2D)
     {
         Debug.Log("Pressure Plate down");
-        //anim.enabled = true;
-        //transform.Translate(0, -0.1f, 0, Space.Self);
         anim.Play("PressurePlateDown");
         
         if (coll.gameObject.CompareTag("Player")){
             //anim.Play("PressurePlateDown");
-            anim.SetBool("PressurePlateDown", true);
         }
 
         doorIsOpen = true;

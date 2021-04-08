@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RemoveCursor : MonoBehaviour
 {
-    public bool vis;
     // Start is called before the first frame update
     void Start()
     {

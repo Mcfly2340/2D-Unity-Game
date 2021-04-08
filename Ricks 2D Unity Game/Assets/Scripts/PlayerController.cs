@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float positionRadius;
     public LayerMask ground;
     public Transform playerPos;
+    private Grab grab;
 
 
     // Start is called before the first frame update
@@ -47,25 +48,20 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            anim.Play("Idle");
-
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                anim.Play("Crawling");
+            }
+            else
+            {
+                anim.Play("Idle");
+            }
         }
         isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
         if(isOnGround && Input.GetKey(KeyCode.Space))
         {
             rb.AddForce(Vector2.up * jumpForce);
         }
-        /*if (Input.GetKey(KeyCode.LeftShift))
-        {
-            Vector3 playerpos = new Vector3(0, 0, 180);
-            Vector3 difference = playerpos - transform.position;
-            float rotationZ = Mathf.Atan2(difference.x, -difference.y) * Mathf.Rad2Deg;
-            
-            rb.MoveRotation(Mathf.LerpAngle(rb.rotation, rotationZ, Time.fixedDeltaTime));
-
-
-
-            anim.Play("Crawling");
-        }*/
+        
     }
 }

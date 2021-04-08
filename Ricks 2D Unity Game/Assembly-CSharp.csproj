@@ -68,10 +68,8 @@
     <Compile Include="Assets\Scripts\MinionFollow.cs" />
     <Compile Include="Assets\Scripts\PlayerControllerOLD.cs" />
     <Compile Include="Assets\Scripts\RemoveCursor.cs" />
-    <Compile Include="Assets\Scripts\HandPointToMouseRight.cs" />
     <Compile Include="Assets\Scripts\OpenDoor.cs" />
     <Compile Include="Assets\Scripts\PressurePlate.cs" />
-    <Compile Include="Assets\Scripts\HandPointToMouseLeft.cs" />
     <Compile Include="Assets\Scripts\CamFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
   </ItemGroup>
