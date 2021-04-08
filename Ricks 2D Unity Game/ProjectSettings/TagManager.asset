@@ -10,6 +10,7 @@ TagManager:
   - Right Leg
   - Left Leg
   - Door
+  - Boxes
   layers:
   - Default
   - TransparentFX

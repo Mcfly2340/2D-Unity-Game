@@ -22,26 +22,20 @@ public class PressurePlate : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider2D)
     {
-        Debug.Log("Pressure Plate down");
-        anim.Play("PressurePlateDown");
-        
-        if (coll.gameObject.CompareTag("Player")){
-            //anim.Play("PressurePlateDown");
+        if (coll.gameObject.CompareTag("Boxes")){
+            Debug.Log("Boxes");
         }
-
+        anim.Play("PressurePlateDown");
         doorIsOpen = true;
         if (doorIsOpen == true)
         {
             doorFunction.gameObject.GetComponent<SpriteRenderer>().sprite = doorFunction.openDoor;
             doorFunction.openSound.Play();
-            Debug.Log("door opened");
             doorObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
     void OnTriggerExit2D(Collider2D collider2D)
     {
-        //click.Stop();
-        //anim.enabled = false;
         anim.Play("PressurePlateUp");
 
         doorIsOpen = false;
@@ -49,12 +43,10 @@ public class PressurePlate : MonoBehaviour
         {
             doorFunction.gameObject.GetComponent<SpriteRenderer>().sprite = doorFunction.closeDoor;
             doorFunction.closeSound.Play();
-            Debug.Log("door closed");
             doorObject.GetComponent<BoxCollider2D>().enabled = true;
 
         }
         //transform.Translate(Vector3.up * 0.1f);
         //transform.Translate(0, 0.1f, 0, Space.Self);
-        Debug.Log("Pressure Plate up");
     }
 }

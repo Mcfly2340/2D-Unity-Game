@@ -13,14 +13,13 @@ public class PlayerController : MonoBehaviour
     public float positionRadius;
     public LayerMask ground;
     public Transform playerPos;
-    private Grab grab;
-
+    public GameObject DoorWay;
 
     // Start is called before the first frame update
     void Start()
     {
         Collider2D[] colliders = transform.GetComponentsInChildren<Collider2D>();
-        for (int i = 0; 1 < colliders.Length; i++)
+        for (int i = 0; i < colliders.Length; i++)
         {
             for (int k = i + 1; k < colliders.Length; k++)
             {
