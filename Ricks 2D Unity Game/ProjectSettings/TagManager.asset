@@ -11,6 +11,7 @@ TagManager:
   - Left Leg
   - Door
   - Boxes
+  - Balloon
   layers:
   - Default
   - TransparentFX

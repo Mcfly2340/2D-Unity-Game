@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Grab : MonoBehaviour
 {
-    private bool hold;
+    public bool hold;
     public KeyCode mouseButton;
-    public Rigidbody2D blnrb;
+    //public Rigidbody2D blnrb;
+    public Animator anim;
+    public bool holdingBalloon = false;
 
     // Update is called once per frame
     void Update()
@@ -18,8 +20,8 @@ public class Grab : MonoBehaviour
         else
         {
             hold = false;
+            holdingBalloon = false;
             Destroy(GetComponent<FixedJoint2D>());
-
         }
     }
     private void OnCollisionEnter2D(Collision2D col)
@@ -27,19 +29,19 @@ public class Grab : MonoBehaviour
         if (col.transform.tag != "Ground" && hold)
         {
             Rigidbody2D rb = col.transform.GetComponent<Rigidbody2D>();
-            if(rb != null)
+            if (rb != null)
             {
                 FixedJoint2D fj = transform.gameObject.AddComponent(typeof(FixedJoint2D)) as FixedJoint2D;
                 fj.connectedBody = rb;
             }
-            else 
+            else
             {
                 FixedJoint2D fj = transform.gameObject.AddComponent(typeof(FixedJoint2D)) as FixedJoint2D;
             }
         }
-        /*if (hold)
+        if (col.transform.tag == "Balloon" && hold)
         {
-            blnrb.AddForce(Physics.gravity * blnrb.mass);
-        }*/
+            holdingBalloon = true;
+        }
     }
 }
