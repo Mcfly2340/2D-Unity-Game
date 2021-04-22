@@ -7,8 +7,8 @@ public class Grab : MonoBehaviour
     public bool hold;
     public KeyCode mouseButton;
     //public Rigidbody2D blnrb;
-    public Animator anim;
     public bool holdingBalloon = false;
+    public GameObject holdingObject;
 
     // Update is called once per frame
     void Update()
@@ -21,22 +21,20 @@ public class Grab : MonoBehaviour
         {
             hold = false;
             holdingBalloon = false;
+            holdingObject = null;
             Destroy(GetComponent<FixedJoint2D>());
         }
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.transform.tag != "Ground" && hold)
+        if (hold && holdingObject == null)
         {
             Rigidbody2D rb = col.transform.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
                 FixedJoint2D fj = transform.gameObject.AddComponent(typeof(FixedJoint2D)) as FixedJoint2D;
                 fj.connectedBody = rb;
-            }
-            else
-            {
-                FixedJoint2D fj = transform.gameObject.AddComponent(typeof(FixedJoint2D)) as FixedJoint2D;
+                holdingObject = transform.gameObject;
             }
         }
         if (col.transform.tag == "Balloon" && hold)

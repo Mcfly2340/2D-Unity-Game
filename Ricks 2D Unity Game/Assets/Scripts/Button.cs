@@ -7,7 +7,7 @@ public class Button : MonoBehaviour
 {
     public void IfClickedOnPlay()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Level 1");
     }
     public void IfClickedOnOptions()
     {
